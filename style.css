@@ -1,11 +1,13 @@
 html,body{   
     overflow: hidden;
     margin: 0;
+    min-height: 600px;
+    height: 100%;   
     padding: 0;
     font-family: 'Noto Sans', sans-serif;
 }
 .wrapper{
-    height: 100vh;    
+    height: 100%;    
     margin: 0;
     padding: 0;
     padding: 25px 0;
@@ -14,6 +16,7 @@ html,body{
 
 .content{
     width: 500px;
+    
     background-color: #ececec;
     height:90%;
     overflow: hidden;
@@ -23,7 +26,7 @@ html,body{
 }
 .content__header{
     height: 200px;
-    background: url('images/header.jpg')  center ;
+    background: url('images/santa.jpg')  center ;
 }
 .content__title{
     margin: 25px;
@@ -39,6 +42,19 @@ html,body{
     flex-direction: column;
     
 
+
+}
+.title{
+    display:flex;
+    align-items: center;
+    justify-content: space-around;
+
+
+
+}
+.close{
+    color:#191a29;
+    
 }
 .inp{
     
@@ -80,7 +96,32 @@ html,body{
     text-align: center;
     color:#ececec;
 }
+.postcard_img{
+    width: 250px;
+    height: 250px;
+    margin: 25px auto;
+    text-align: center;
+   
+    background-size: cover;
+    border-radius: 50%;
+    
+}
 
+.postcard_text{
+    margin: 15px;
+    text-align: center;
+}
+.btn-back{
+    display: block;
+    width: 90%;  
+    background-color: #016297;
+    color:#fff;
+    margin: 0 auto;
+}
+
+.hide{
+    display: none;
+}
 @media screen and (max-width: 555px){
     .content{
         width: 440px;
@@ -89,6 +130,17 @@ html,body{
 }
 @media screen and (max-width: 400px){
     .content{
-        width: 400px;
+        width: 300px;
+       height: 85%;
+    }
+    .postcard_img{
+        width: 150px;
+        height: 150px;
+        margin: 5px auto;
+    }
+    .btn{         
+        
+        border-radius: 40px;
+        padding: 10px 12px;
     }
 }
