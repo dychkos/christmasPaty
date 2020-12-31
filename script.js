@@ -4,70 +4,85 @@ let text = [
     'с Новым годом! Пусть к чёрту катятся все проблемы! Пусть трезвый Дед Мороз подарит опьяняющее счастье трезвой реальности! Желаю крутых подъёмов в новом году, максимальных доходов, желаемых результатов в делах и невероятно страстных чувств в отношениях!',
     'пусть в новом году будет счастья немерено. Пусть не будет ни одной минуты зря потеряно. Пусть любовь доводит до сладкого головокружения, пусть не будет чувства усталости и изнеможения. Поздравляю с Новым годом! Пусть он избавит от всех «оленей» на пути и подарит вечное состояние радости.',
     'Хэппи нью йиа! Ну, если непонятно — с Новым годом! Желаю больших бабосов и лёгких путей к успеху, будто ты идёшь по гладкому асфальту в кроссах. Пусть новый год будет бомбически прекрасным и эпически счастливым. Желаю провести его без кашля и соплей, желаю двигаться к мечтам энергичней и быстрей',
-         
+    'С наступающим Новым годом! Пускай этот красивый праздник внесет в жизнь яркие перемены, которые сделают ее богаче и насыщеннее. Пускай не пугают крутые жизненные виражи – они все будут вести к успеху! Загадывайте поскорее желание, и оно под бой курантов обязательно исполнится!',
+    'Поздравляю с Новым 2021 годом, желаю волнующего и прекрасного настроения. Чтобы душа была наполнена счастьем, а эмоции били через край! Пусть в памяти останутся только добрые и приятные воспоминания об уходящем годе!',
+    'Пусть Новый 2021 год станет лучше, чем предыдущий. И рядом с Вами всегда будут искренние, надежные друзья, а в личной жизни - любящий и преданный человек. Встречайте этот праздник с улыбкой, чтобы он был полон радостных событий и добрых эмоций!',
+    'Новый год – это всегда вера в лучшее будущее. Пусть наступающий год обязательно реализует все ваши мечты и пожелания, создаст возможности для дальнейших успехов и процветания. Желаю, чтобы он оказался по-настоящему успешным, принес каждому здоровье и процветание! С Новым годом!',
+    'Под звон наполненных бокалов и взрыв салютов, мы желаем Вам здоровья и благополучия. Только праздничного настроения, оптимизма, и правильных решений во всех жизненных ситуациях. Пусть 2021 год будет переломным, с радостными новостями и приятными событиями!'
+
 ]
 
-const getRandom = () =>{
-    let rand = Math.floor((Math.random()*10));
+const getRandom = () => {
+    let rand = Math.floor((Math.random() * 10));
     return rand;
 }
 
 let injElem = document.querySelector('.content');
+
 console.log(getRandom())
 
 class Postcard {
-    constructor(options){
+    constructor(options) {
         this.$post = document.createElement('div');
         this.$post.classList.add('widnow-2');
-        this.$post.innerHTML=` <div class="title">
+        this.$post.innerHTML = ` <div class="title">
         <h2 style="text-align: center;">С НОВЫМ ГОДОМ!</h2>
-        <span class="close"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">  <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+        <span class="close"><svg data-close="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">  <path data-close="true" d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
         </svg></i></span>
         </div> 
         <div class="postcard_text">
            <strong>${options.name}, </strong>${options.text}
         </div>
-        <div style=" background: url('images/gifts/${options.img}.gif') no-repeat center;" class="postcard_img">
+        <div style=" background: url('images/gifts/${options.img}.gif') no-repeat center; background-size: cover;" class="postcard_img">
            
         </div>
-        <input type="submit" class="btn btn-back" value="ИЗМЕНИТЬ ИМЯ">
-        `;
         
+        `;
+
 
     }
-    generate(){
+    generate() {
         injElem.appendChild(this.$post)
     }
-    hide(){
+    hide() {
         this.$post.classList.add('hide');
     }
-    
+
 }
-function initClick(){
-    let hide = document.querySelector('.window-1');
+let hide = document.querySelector('.window-1');
+//обрабатываем событие для всех data-close
+
+
+function initClick() {
     let name = document.querySelector('.inp').value;
     hide.classList.add('hide');
     let happy = new Postcard({
-        text:text[getRandom()],
-        img:getRandom(),
+        text: text[getRandom()],
+        img: getRandom(),
         name
     })
-    
+
     happy.generate();
+    const listener = event => {
+        console.log(event.target)
+        if (event.target.dataset.close) {
+            happy.hide();
+            hide.classList.remove('hide');
+        }
+        document.querySelector('.inp').value = ' ';
+    }
+
+    happy.$post.addEventListener('click', listener);
 
 }
 let send = document.getElementById('send');
 
-send.addEventListener('click',event=>{
+
+send.addEventListener('click', event => {
     event.preventDefault();
     initClick();
 
 })
-let close = document.querySelector('.close');
 
-send.addEventListener('click',event=>{
-    event.preventDefault();
-   
 
-})
-
+//реализация закрытия окна
